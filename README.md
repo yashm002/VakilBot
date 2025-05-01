@@ -26,7 +26,7 @@ This project uses the **Indian Court Judgements and Its Summaries** dataset from
 # Tech Stack
 
 - Python
-- Flask (or Streamlit, if applicable)
+- Flask
 - Transformers (Hugging Face)
 - PyTesseract for OCR
 - GitHub for version control

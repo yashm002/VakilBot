@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VakilBot - Simplify Legal Documents</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    .center-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+    #uploadBtn {
+      background-color: #000000;
+      color: white;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 12px;
+      font-family: 'inter', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.403); /* ← This adds the shadow */
+      transition: box-shadow 0.3s ease;
+      
+    }
+    #uploadBtn {
+    width: 185px;
+  }
+
+    #uploadBtn:hover {
+      background-color: #2f2f2f;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">
+      <img src="../../assets/logo.png" alt="Logo"  class="logo" />
+    </a>
+  </header>
+
+  <div class="container">
+    <p class="main-title">Simplify Your Legal Documents with AI</p>
+    <p class="sub-title">Transform complex legal jargon into clear, concise summaries. Upload your documents<br>today and experience the ease of understanding legal text.</p>
+    <div style="text-align: center;">
+      <button id="uploadBtn">Upload Your File</button>
+      <div id="fileStatus" style="margin-top: 10px; font-weight: 500; color: black;"></div>
+      <input type="file" id="fileInput" accept=".pdf,.png,.jpg,.jpeg,.webp" onchange="handleUpload(event)">
+      <input type="file" id="file" accept=".pdf,.docx,.txt" />
+    </div>
+    <label for="text">Or</label>
+    <textarea id="text" placeholder="Paste your legal document text here..."></textarea>
+    <div style="text-align: center;">
+      <button id="simplifyBtn">Simplify Document</button>
+    </div>
+  </div>
+
+  <script>
+    const uploadBtn = document.getElementById("uploadBtn");
+    const fileInput = document.getElementById("fileInput");
+    const fileStatus = document.getElementById("fileStatus");
+    const simplifyBtn = document.getElementById("simplifyBtn");
+  
+    let uploadedFileData = null;
+    let uploadedFileName = null;
+  
+    uploadBtn.addEventListener("click", () => {
+      fileInput.click();
+    });
+  
+    function handleUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+  
+        reader.onload = function (e) {
+          uploadedFileData = e.target.result;
+          uploadedFileName = file.name;
+  
+          // Save to localStorage
+          localStorage.setItem("uploadedFile", uploadedFileData);
+          localStorage.setItem("fileName", uploadedFileName);
+  
+          // Show feedback
+          fileStatus.innerText = `File uploaded: ${uploadedFileName}`;
+        };
+  
+        reader.readAsDataURL(file);
+      }
+    }
+  
+    function goToLoading() {
+      const text = document.getElementById("text").value.trim();
+      const hasText = text.length > 0;
+      const hasFile = localStorage.getItem("uploadedFile");
+  
+      if (hasText) {
+        localStorage.setItem("manualText", text);
+        window.location.href = "loading.html";
+      } else if (hasFile) {
+        window.location.href = "loading.html";
+      } else {
+        alert("Please upload a file or paste text!");
+      }
+    }
+  
+    // Attach goToLoading to button in JS if needed
+    if (simplifyBtn) {
+      simplifyBtn.addEventListener("click", goToLoading);
+    }
+  </script>
+  
+  
+  
+  <footer>
+    © 2025 VakilBot. All rights reserved.
+  </footer>
+
+  <script src="../js/index.js"></script>
+</body>
+</html>

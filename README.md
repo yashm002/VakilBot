@@ -9,6 +9,16 @@ The fine-tuned model used for summarization is available here:
 
 [Download Model from Google Drive](https://drive.google.com/drive/folders/1Z3pEWvfh1tmst6CuxnLlVuEcI9JTCazG?usp=sharing)
 
+# Pre-trained Model
+
+VakilBot uses **Facebook's BART (Bidirectional and Auto-Regressive Transformers)** model as the base for fine-tuning.
+
+**BART** is a transformer-based sequence-to-sequence model developed by Facebook AI, capable of text generation, translation, and summarization. It's particularly effective for abstractive summarization tasks due to its encoder-decoder architecture.
+We fine-tuned the `facebook/bart-large` model on a legal domain-specific dataset to improve its performance on summarizing Indian court judgments.
+
+More about BART:  
+[facebook/bart-large on Hugging Face](https://huggingface.co/facebook/bart-large)
+
 # Dataset Used for Fine-Tuning Model
 
 This project uses the **Indian Court Judgements and Its Summaries** dataset from Hugging Face:
